@@ -1,0 +1,738 @@
+[gd_scene load_steps=35 format=3 uid="uid://br3x22ldym0gf"]
+
+[ext_resource type="Shader" uid="uid://b8nw6qk82phwy" path="res://Main/bg.gdshader" id="1_k3v36"]
+[ext_resource type="Script" uid="uid://deaog4i4egdwa" path="res://Main/main.gd" id="1_liyct"]
+[ext_resource type="FontFile" uid="uid://crkqklcx5it3p" path="res://Resources/AmaticSC-Bold.ttf" id="2_2w1kt"]
+[ext_resource type="Script" uid="uid://cu5gdcah3gvb4" path="res://Classes/Button.gd" id="2_qvhan"]
+[ext_resource type="Texture2D" uid="uid://cxl3iyf2t2cbf" path="res://Resources/Backgrounds/bg_night.png" id="3_qac2q"]
+[ext_resource type="Texture2D" uid="uid://r7e0bq4xcjpa" path="res://Main/white_pixel.png" id="4_ib3t1"]
+[ext_resource type="Texture2D" uid="uid://brg85vbi03qy5" path="res://Main/black_square.png" id="8_f6fdm"]
+[ext_resource type="Script" uid="uid://c20y5qwfd213r" path="res://Pieces/pieces.gd" id="8_qac2q"]
+[ext_resource type="Shader" uid="uid://ccgcsgpdi01xo" path="res://Main/black_circle.gdshader" id="8_rj11h"]
+[ext_resource type="Texture2D" uid="uid://bvajhw232xwd8" path="res://Main/arrow.png" id="10_qac2q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_liyct"]
+shader = ExtResource("1_k3v36")
+
+[sub_resource type="Curve" id="Curve_ib3t1"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.272059, 1), 0.0, 0.0, 0, 0, Vector2(0.779412, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_f6fdm"]
+curve = SubResource("Curve_ib3t1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f6fdm"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(360, 360, 1)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 10.0
+initial_velocity_max = 40.0
+scale_min = 5.0
+scale_max = 5.0
+alpha_curve = SubResource("CurveTexture_f6fdm")
+
+[sub_resource type="LabelSettings" id="LabelSettings_2w1kt"]
+font = ExtResource("2_2w1kt")
+font_size = 120
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_eunhr"]
+font = ExtResource("2_2w1kt")
+font_size = 90
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qac2q"]
+size = Vector2(526, 87)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_liyct"]
+size = Vector2(153, 87)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qvhan"]
+font = ExtResource("2_2w1kt")
+font_size = 100
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k3v36"]
+size = Vector2(138, 58)
+
+[sub_resource type="LabelSettings" id="LabelSettings_k3v36"]
+font = ExtResource("2_2w1kt")
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_ib3t1"]
+font = ExtResource("2_2w1kt")
+font_size = 50
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rj11h"]
+size = Vector2(505, 58)
+
+[sub_resource type="LabelSettings" id="LabelSettings_liyct"]
+font = ExtResource("2_2w1kt")
+font_size = 120
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ib3t1"]
+size = Vector2(138, 87)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f6fdm"]
+font = ExtResource("2_2w1kt")
+font_size = 80
+
+[sub_resource type="LabelSettings" id="LabelSettings_qac2q"]
+font = ExtResource("2_2w1kt")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_rj11h"]
+font = ExtResource("2_2w1kt")
+font_size = 40
+
+[sub_resource type="Theme" id="Theme_rj11h"]
+default_font = ExtResource("2_2w1kt")
+default_font_size = 40
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rj11h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o60nc"]
+size = Vector2(124, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f3gf5"]
+size = Vector2(50, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rix8b"]
+size = Vector2(106, 53)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qac2q"]
+shader = ExtResource("8_rj11h")
+shader_parameter/rad = 1.0
+shader_parameter/pos = Vector2(0.5, 0.5)
+shader_parameter/alpha = 1.0
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_liyct")
+
+[node name="BG" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_liyct")
+position = Vector2(360.024, 360)
+texture = ExtResource("3_qac2q")
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+position = Vector2(363, 376)
+amount = 24
+texture = ExtResource("4_ib3t1")
+lifetime = 20.0
+randomness = 0.33
+process_material = SubResource("ParticleProcessMaterial_f6fdm")
+
+[node name="Title" type="Node2D" parent="."]
+visible = false
+
+[node name="Title" type="Label" parent="Title"]
+offset_left = 1.0
+offset_top = 14.0
+offset_right = 721.0
+offset_bottom = 166.0
+text = "Practice Tracker"
+label_settings = SubResource("LabelSettings_2w1kt")
+horizontal_alignment = 1
+
+[node name="Streak" type="Label" parent="Title"]
+offset_left = 1.0
+offset_top = 177.0
+offset_right = 721.0
+offset_bottom = 292.0
+text = "Daily Streak: 0"
+label_settings = SubResource("LabelSettings_eunhr")
+horizontal_alignment = 1
+
+[node name="End" type="Area2D" parent="Title"]
+visible = false
+position = Vector2(359, 434)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Title/End"]
+position = Vector2(3, 0.5)
+shape = SubResource("RectangleShape2D_qac2q")
+
+[node name="Label" type="Label" parent="Title/End"]
+offset_left = -358.0
+offset_top = -64.0
+offset_right = 362.0
+offset_bottom = 51.0
+text = "Come back tommorow!"
+label_settings = SubResource("LabelSettings_eunhr")
+horizontal_alignment = 1
+
+[node name="Buttons" type="Node2D" parent="Title"]
+
+[node name="Start" type="Area2D" parent="Title/Buttons"]
+position = Vector2(359, 434)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Title/Buttons/Start"]
+position = Vector2(-2.5, 0.5)
+shape = SubResource("RectangleShape2D_liyct")
+
+[node name="Label" type="Label" parent="Title/Buttons/Start"]
+offset_left = -105.0
+offset_top = -76.0
+offset_right = 101.0
+offset_bottom = 76.0
+text = "Start"
+label_settings = SubResource("LabelSettings_qvhan")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Settings" type="Area2D" parent="Title/Buttons"]
+position = Vector2(101, 659)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Title/Buttons/Settings"]
+shape = SubResource("RectangleShape2D_k3v36")
+
+[node name="Label" type="Label" parent="Title/Buttons/Settings"]
+offset_left = -73.0
+offset_top = -39.0
+offset_right = 75.0
+offset_bottom = 37.0
+text = "Settings"
+label_settings = SubResource("LabelSettings_k3v36")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stats" type="Area2D" parent="Title/Buttons"]
+position = Vector2(261, 659)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Title/Buttons/Stats"]
+shape = SubResource("RectangleShape2D_k3v36")
+
+[node name="Label" type="Label" parent="Title/Buttons/Stats"]
+offset_left = -73.0
+offset_top = -39.0
+offset_right = 75.0
+offset_bottom = 37.0
+text = "Stats"
+label_settings = SubResource("LabelSettings_k3v36")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Close" type="Area2D" parent="Title/Buttons"]
+position = Vector2(623, 659)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Title/Buttons/Close"]
+shape = SubResource("RectangleShape2D_k3v36")
+
+[node name="Label" type="Label" parent="Title/Buttons/Close"]
+offset_left = -73.0
+offset_top = -39.0
+offset_right = 75.0
+offset_bottom = 37.0
+text = "Close"
+label_settings = SubResource("LabelSettings_k3v36")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stats" type="Node2D" parent="."]
+visible = false
+
+[node name="Title" type="Label" parent="Stats"]
+offset_left = 1.0
+offset_top = 42.0
+offset_right = 721.0
+offset_bottom = 157.0
+text = "Stats"
+label_settings = SubResource("LabelSettings_eunhr")
+horizontal_alignment = 1
+
+[node name="FirstPractice" type="Label" parent="Stats"]
+offset_top = 179.0
+offset_right = 720.0
+offset_bottom = 243.0
+text = "First practice: N/A"
+label_settings = SubResource("LabelSettings_ib3t1")
+horizontal_alignment = 1
+
+[node name="LastPractice" type="Label" parent="Stats"]
+offset_top = 243.0
+offset_right = 720.0
+offset_bottom = 307.0
+text = "Last Practice: N/A"
+label_settings = SubResource("LabelSettings_ib3t1")
+horizontal_alignment = 1
+
+[node name="TotalPractice" type="Label" parent="Stats"]
+offset_top = 307.0
+offset_right = 720.0
+offset_bottom = 371.0
+text = "Total Practice Days: 0"
+label_settings = SubResource("LabelSettings_ib3t1")
+horizontal_alignment = 1
+
+[node name="TotalMissed" type="Label" parent="Stats"]
+offset_top = 371.0
+offset_right = 720.0
+offset_bottom = 435.0
+text = "Total Missed Days: 0"
+label_settings = SubResource("LabelSettings_ib3t1")
+horizontal_alignment = 1
+
+[node name="CurrentStreak" type="Label" parent="Stats"]
+offset_top = 435.0
+offset_right = 720.0
+offset_bottom = 499.0
+text = "Current Streak: 0"
+label_settings = SubResource("LabelSettings_ib3t1")
+horizontal_alignment = 1
+
+[node name="LongestStreak" type="Label" parent="Stats"]
+offset_top = 499.0
+offset_right = 720.0
+offset_bottom = 563.0
+text = "Longest Streak: 0"
+label_settings = SubResource("LabelSettings_ib3t1")
+horizontal_alignment = 1
+
+[node name="Back" type="Area2D" parent="Stats"]
+position = Vector2(92, 665)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Stats/Back"]
+shape = SubResource("RectangleShape2D_k3v36")
+
+[node name="Label" type="Label" parent="Stats/Back"]
+offset_left = -73.0
+offset_top = -39.0
+offset_right = 75.0
+offset_bottom = 37.0
+text = "Back"
+label_settings = SubResource("LabelSettings_k3v36")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pieces" type="Area2D" parent="Stats"]
+position = Vector2(615, 667)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Stats/Pieces"]
+shape = SubResource("RectangleShape2D_k3v36")
+
+[node name="Label" type="Label" parent="Stats/Pieces"]
+offset_left = -73.0
+offset_top = -39.0
+offset_right = 75.0
+offset_bottom = 37.0
+text = "Pieces"
+label_settings = SubResource("LabelSettings_k3v36")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Settings" type="Node2D" parent="."]
+visible = false
+
+[node name="Title" type="Label" parent="Settings"]
+offset_left = 1.0
+offset_top = 42.0
+offset_right = 721.0
+offset_bottom = 157.0
+text = "Settings"
+label_settings = SubResource("LabelSettings_eunhr")
+horizontal_alignment = 1
+
+[node name="Back" type="Area2D" parent="Settings"]
+position = Vector2(623, 659)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Settings/Back"]
+shape = SubResource("RectangleShape2D_k3v36")
+
+[node name="Label" type="Label" parent="Settings/Back"]
+offset_left = -73.0
+offset_top = -39.0
+offset_right = 75.0
+offset_bottom = 37.0
+text = "Back"
+label_settings = SubResource("LabelSettings_k3v36")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="Node2D" parent="Settings"]
+
+[node name="Volume" type="Area2D" parent="Settings/Buttons"]
+position = Vector2(360, 232)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Settings/Buttons/Volume"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_rj11h")
+
+[node name="Left" type="Sprite2D" parent="Settings/Buttons/Volume"]
+position = Vector2(-240, 2)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_qac2q")
+
+[node name="Right" type="Sprite2D" parent="Settings/Buttons/Volume"]
+position = Vector2(240, 2)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_qac2q")
+flip_h = true
+
+[node name="Label" type="Label" parent="Settings/Buttons/Volume"]
+offset_left = -360.0
+offset_top = -39.0
+offset_right = 361.0
+offset_bottom = 37.0
+text = "Volume: 10"
+label_settings = SubResource("LabelSettings_k3v36")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sound" type="Area2D" parent="Settings/Buttons"]
+position = Vector2(360, 320)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Settings/Buttons/Sound"]
+shape = SubResource("RectangleShape2D_rj11h")
+
+[node name="Left" type="Sprite2D" parent="Settings/Buttons/Sound"]
+position = Vector2(-240, 2)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_qac2q")
+
+[node name="Right" type="Sprite2D" parent="Settings/Buttons/Sound"]
+position = Vector2(240, 2)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_qac2q")
+flip_h = true
+
+[node name="Label" type="Label" parent="Settings/Buttons/Sound"]
+offset_left = -360.0
+offset_top = -39.0
+offset_right = 361.0
+offset_bottom = 37.0
+text = "Alarm Sound: Default"
+label_settings = SubResource("LabelSettings_k3v36")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SoundPreview" type="AudioStreamPlayer" parent="Settings/Buttons/Sound"]
+
+[node name="Background" type="Area2D" parent="Settings/Buttons"]
+position = Vector2(360, 408)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Settings/Buttons/Background"]
+shape = SubResource("RectangleShape2D_rj11h")
+
+[node name="Left" type="Sprite2D" parent="Settings/Buttons/Background"]
+position = Vector2(-240, 2)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_qac2q")
+
+[node name="Right" type="Sprite2D" parent="Settings/Buttons/Background"]
+position = Vector2(240, 2)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_qac2q")
+flip_h = true
+
+[node name="Label" type="Label" parent="Settings/Buttons/Background"]
+offset_left = -360.0
+offset_top = -39.0
+offset_right = 361.0
+offset_bottom = 37.0
+text = "Background: Night"
+label_settings = SubResource("LabelSettings_k3v36")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WindowSize" type="Area2D" parent="Settings/Buttons"]
+position = Vector2(360, 496)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Settings/Buttons/WindowSize"]
+shape = SubResource("RectangleShape2D_rj11h")
+
+[node name="Left" type="Sprite2D" parent="Settings/Buttons/WindowSize"]
+position = Vector2(-240, 2)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_qac2q")
+
+[node name="Right" type="Sprite2D" parent="Settings/Buttons/WindowSize"]
+position = Vector2(240, 2)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_qac2q")
+flip_h = true
+
+[node name="Label" type="Label" parent="Settings/Buttons/WindowSize"]
+offset_left = -360.0
+offset_top = -39.0
+offset_right = 361.0
+offset_bottom = 37.0
+text = "Window Size: 720"
+label_settings = SubResource("LabelSettings_k3v36")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Run" type="Node2D" parent="."]
+
+[node name="TimerBlink" type="Timer" parent="Run"]
+wait_time = 0.6
+one_shot = true
+
+[node name="RunTime" type="Timer" parent="Run"]
+one_shot = true
+
+[node name="Activity" type="Node2D" parent="Run"]
+position = Vector2(356, 121)
+
+[node name="Label" type="Label" parent="Run/Activity"]
+offset_left = -355.0
+offset_top = -67.0
+offset_right = 365.0
+offset_bottom = 48.0
+text = "Scales"
+label_settings = SubResource("LabelSettings_eunhr")
+horizontal_alignment = 1
+
+[node name="TimeLeft" type="Label" parent="Run"]
+offset_top = 331.0
+offset_right = 720.0
+offset_bottom = 446.0
+text = "Time Left"
+label_settings = SubResource("LabelSettings_ib3t1")
+horizontal_alignment = 1
+
+[node name="PieceName" type="Label" parent="Run"]
+offset_top = 159.0
+offset_right = 720.0
+offset_bottom = 274.0
+label_settings = SubResource("LabelSettings_ib3t1")
+horizontal_alignment = 1
+
+[node name="Timer" type="Label" parent="Run"]
+offset_top = 380.0
+offset_right = 720.0
+offset_bottom = 532.0
+text = "15:00"
+label_settings = SubResource("LabelSettings_liyct")
+horizontal_alignment = 1
+
+[node name="Pause" type="Area2D" parent="Run"]
+position = Vector2(359, 603)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Run/Pause"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_ib3t1")
+
+[node name="Label" type="Label" parent="Run/Pause"]
+offset_left = -73.0
+offset_top = -58.0
+offset_right = 75.0
+offset_bottom = 57.0
+text = "Pause"
+label_settings = SubResource("LabelSettings_f6fdm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pieces" type="Node2D" parent="."]
+visible = false
+script = ExtResource("8_qac2q")
+
+[node name="ColorRect2" type="ColorRect" parent="Pieces"]
+visible = false
+offset_left = 351.0
+offset_top = 183.0
+offset_right = 369.0
+offset_bottom = 771.0
+color = Color(0.513233, 0.513233, 0.513233, 0.411765)
+
+[node name="ColorRect3" type="ColorRect" parent="Pieces"]
+visible = false
+offset_left = -1.0
+offset_top = 165.0
+offset_right = 863.0
+offset_bottom = 183.0
+color = Color(0.513233, 0.513233, 0.513233, 0.411765)
+
+[node name="Title" type="Label" parent="Pieces"]
+offset_left = 1.0
+offset_top = 42.0
+offset_right = 721.0
+offset_bottom = 157.0
+text = "Pieces"
+label_settings = SubResource("LabelSettings_eunhr")
+horizontal_alignment = 1
+
+[node name="Info" type="Node2D" parent="Pieces"]
+
+[node name="Title" type="Label" parent="Pieces/Info"]
+offset_left = 369.0
+offset_top = 197.0
+offset_right = 720.0
+offset_bottom = 261.0
+text = "Info"
+label_settings = SubResource("LabelSettings_qac2q")
+horizontal_alignment = 1
+
+[node name="Name" type="Label" parent="Pieces/Info"]
+offset_left = 369.0
+offset_top = 268.0
+offset_right = 720.0
+offset_bottom = 319.0
+text = "Add a piece to get started"
+label_settings = SubResource("LabelSettings_rj11h")
+horizontal_alignment = 1
+clip_text = true
+
+[node name="FirstPractice" type="Label" parent="Pieces/Info"]
+offset_left = 369.0
+offset_top = 320.0
+offset_right = 720.0
+offset_bottom = 371.0
+label_settings = SubResource("LabelSettings_rj11h")
+horizontal_alignment = 1
+
+[node name="LastPractice" type="Label" parent="Pieces/Info"]
+offset_left = 369.0
+offset_top = 376.0
+offset_right = 720.0
+offset_bottom = 427.0
+label_settings = SubResource("LabelSettings_rj11h")
+horizontal_alignment = 1
+
+[node name="TimesPracticed" type="Label" parent="Pieces/Info"]
+offset_left = 369.0
+offset_top = 428.0
+offset_right = 720.0
+offset_bottom = 479.0
+label_settings = SubResource("LabelSettings_rj11h")
+horizontal_alignment = 1
+
+[node name="Rename" type="LineEdit" parent="Pieces/Info"]
+offset_left = 369.0
+offset_top = 514.0
+offset_right = 720.0
+offset_bottom = 573.0
+theme = SubResource("Theme_rj11h")
+theme_override_colors/selection_color = Color(0.605274, 0.605274, 0.605274, 0.278431)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rj11h")
+placeholder_text = "Rename Piece"
+alignment = 1
+max_length = 30
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+flat = true
+
+[node name="ConfirmRename" type="Area2D" parent="Pieces/Info"]
+position = Vector2(542, 603)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Pieces/Info/ConfirmRename"]
+shape = SubResource("RectangleShape2D_o60nc")
+
+[node name="Label" type="Label" parent="Pieces/Info/ConfirmRename"]
+offset_left = -176.0
+offset_top = -26.0
+offset_right = 176.0
+offset_bottom = 26.0
+text = "Confirm"
+label_settings = SubResource("LabelSettings_rj11h")
+horizontal_alignment = 1
+
+[node name="Select" type="Node2D" parent="Pieces"]
+
+[node name="Title" type="Label" parent="Pieces/Select"]
+offset_top = 197.0
+offset_right = 351.0
+offset_bottom = 261.0
+text = "Select"
+label_settings = SubResource("LabelSettings_qac2q")
+horizontal_alignment = 1
+
+[node name="PieceButtons" type="Node2D" parent="Pieces/Select"]
+
+[node name="NewPiece" type="LineEdit" parent="Pieces/Select"]
+offset_top = 592.0
+offset_right = 354.0
+offset_bottom = 664.0
+theme = SubResource("Theme_rj11h")
+theme_override_colors/selection_color = Color(0.605274, 0.605274, 0.605274, 0.278431)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rj11h")
+placeholder_text = "Add new piece"
+alignment = 1
+max_length = 30
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+flat = true
+
+[node name="ConfirmNewPiece" type="Area2D" parent="Pieces/Select"]
+position = Vector2(173, 677)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Pieces/Select/ConfirmNewPiece"]
+shape = SubResource("RectangleShape2D_o60nc")
+
+[node name="Label" type="Label" parent="Pieces/Select/ConfirmNewPiece"]
+offset_left = -176.0
+offset_top = -26.0
+offset_right = 176.0
+offset_bottom = 26.0
+text = "Confirm"
+label_settings = SubResource("LabelSettings_rj11h")
+horizontal_alignment = 1
+
+[node name="Up" type="Area2D" parent="Pieces/Select"]
+position = Vector2(176, 293)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Pieces/Select/Up"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_f3gf5")
+
+[node name="Sprite" type="Sprite2D" parent="Pieces/Select/Up"]
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_qac2q")
+
+[node name="Down" type="Area2D" parent="Pieces/Select"]
+position = Vector2(176, 553)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Pieces/Select/Down"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_f3gf5")
+
+[node name="Sprite" type="Sprite2D" parent="Pieces/Select/Down"]
+rotation = -1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_qac2q")
+
+[node name="Back" type="Area2D" parent="Pieces"]
+position = Vector2(546, 670)
+script = ExtResource("2_qvhan")
+
+[node name="Collision" type="CollisionShape2D" parent="Pieces/Back"]
+position = Vector2(-4, 1.5)
+shape = SubResource("RectangleShape2D_rix8b")
+
+[node name="Label" type="Label" parent="Pieces/Back"]
+offset_left = -174.0
+offset_top = -39.0
+offset_right = 162.0
+offset_bottom = 37.0
+text = "Back"
+label_settings = SubResource("LabelSettings_k3v36")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Transition" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_qac2q")
+position = Vector2(360, 360)
+texture = ExtResource("8_f6fdm")
+
+[connection signal="timeout" from="Run/RunTime" to="." method="run_time_ended"]

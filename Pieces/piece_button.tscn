@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0nyl525vou2p"]
+
+[ext_resource type="Script" uid="uid://cu5gdcah3gvb4" path="res://Classes/Button.gd" id="1_2cbtp"]
+[ext_resource type="FontFile" uid="uid://crkqklcx5it3p" path="res://Resources/AmaticSC-Bold.ttf" id="2_parhg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shh76"]
+size = Vector2(216, 34)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6rf26"]
+font = ExtResource("2_parhg")
+font_size = 40
+
+[node name="PieceButton" type="Area2D"]
+script = ExtResource("1_2cbtp")
+
+[node name="Highlight" type="ColorRect" parent="."]
+visible = false
+offset_left = -111.0
+offset_top = -11.0
+offset_right = 110.0
+offset_bottom = 11.0
+mouse_filter = 2
+color = Color(0.7, 0.7, 0.7, 0.470588)
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_shh76")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -125.0
+offset_top = -26.0
+offset_right = 125.0
+offset_bottom = 26.0
+text = "Piece Name"
+label_settings = SubResource("LabelSettings_6rf26")
+horizontal_alignment = 1
+clip_text = true
